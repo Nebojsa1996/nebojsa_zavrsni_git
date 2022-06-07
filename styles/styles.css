@@ -94,6 +94,7 @@ h6,
   margin-bottom: 0;
   font-size: 2rem;
   font-weight: 400;
+  color: #b34848;
 }
 .blog-description {
   font-size: 1.1rem;
@@ -143,10 +144,25 @@ h6,
 .blog-post-title {
   margin-bottom: 0.25rem;
   font-size: 2.5rem;
+  color: #b34848;
 }
 .blog-post-meta {
   margin-bottom: 1.25rem;
   color: #999;
+}
+
+/* .blog-post-title:hover {
+  margin-bottom: 0.25rem;
+  font-size: 2.5rem;
+  color: #b34848;
+} */
+
+.blog-post-title a {
+  color: #b34848;
+}
+
+.title-change {
+  color: #b44848;
 }
 
 /*
