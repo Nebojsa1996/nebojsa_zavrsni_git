@@ -18,13 +18,14 @@
             <li><a href="#">June 2013</a></li>
             <li><a href="#">May 2013</a></li>
             <li><a href="#">April 2013</a></li>
-        </ol>            </div>
+        </ol>            
+    </div>
     <div class="sidebar-module">
         <h4>Elsewhere</h4>
         <ol class="list-unstyled">
-            <li><a href="#">GitHub</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Facebook</a></li>
+            <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+            <li><a href="https://twitter.com/i/flow/login" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/" target="_blank">Facebook</a></li>
         </ol>
     </div>
 </aside><!-- /.blog-sidebar -->

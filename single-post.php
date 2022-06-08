@@ -1,39 +1,88 @@
-<?php 
-include("header.php");
+
+
+<?php include("db.php"); ?>
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Vivify Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="styles/blog.css" rel="stylesheet">
+    <link href="styles/styles.css" rel="stylesheet">
+</head>
+
+<body>
+<?php include('header.php');
+
+
+    if (isset($_GET['post_id'])) {
+
+        $sql = "SELECT 
+                p.id, p.title, p.body, p.created_at, a.first_name, a.last_name, a.gender
+                FROM posts as p 
+                inner join author as a on p.id = a.id
+                WHERE p.id = {$_GET['post_id']}";
+
+        $singlePost = fetch($sql, $connection);
+
+
+        $sql_comments = "SELECT c.id, c.text, a.first_name, a.last_name
+        FROM comments AS c 
+        inner join author as a on c.id = a.id
+        WHERE c.post_id = {$_GET['post_id']}";
+
+        $comments = fetch($sql_comments, $connection, true);
+};
+
 ?>
 
+    <main role="main" class="container">
 
-<main role="main" class="container">
+        <div class="row">
+            <article class="va-c-article">
 
-    <div class="row">
+                <header>
+                    <h1><?php echo $singlePost['title'] ?></h1>
+                    <div class="va-c-article__meta"><?php echo $singlePost['created_at'] ?>. by <span class="<?php echo ($singlePost['gender']) ?>"><?php echo $singlePost['first_name'] . " " . $singlePost['last_name'] ?></span></div>
+                </header>
+                <div>
+                    <p><?php echo $singlePost['body'] ?></p>
+                </div>
 
-        <div class="col-sm-8 blog-main">
 
-            <div class="blog-post">
-                <h2 class="blog-post-title">Sample blog post</h2>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
+                <div class="comments">
+                    <h3>comments</h3>
 
-                <p>This blog post shows a few different types of content that's supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
-                <hr>
-                <p>Cum sociis natoque penatibus et magnis <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.</p>
-                <blockquote>
-                    <p>Curabitur blandit tempus porttitor. <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                </blockquote>
-                <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
-                <h2>Heading</h2>
-                <p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                <?php 
-                include("sidebar.php");
-                ?>
-            </div><!-- /.blog-post -->
+                    <?php foreach ($comments as $comment) { ?>
+                        <div class="single-comment">
+                            <div>posted by: <strong>
+                                    <?php echo $comment["first_name"] . " " . $comment['last_name'] ?>
+                                </strong></div>
+                            <div><?php echo $comment["text"] ?>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
+            </article>
 
-            <nav class="blog-pagination">
-                <a class="btn btn-outline-primary" href="#">Older</a>
-                <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-            </nav>
+<?php include('sidebar.php') ?>
 
-    </div><!-- /.blog-main -->
+</div><!-- /.row -->
 
-<?php 
-include("footer.php");
+</main><!-- /.container -->
+
+<?php include("footer.php"); ?>
 ?>

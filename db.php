@@ -1,18 +1,31 @@
 <?php
-// $servername = "localhost";
-// $username = "academy";
-// $password = "academy";
-// $dbname = "blog";
 
-// // Create connection !!
-// $conn = mysqli_connect($servername, $username, $password, $dbname);
-// // Check connection !!
-// if (!$conn) {
-//   die("Connection failed: " . mysqli_connect_error());
-// }
+$servername = "127.0.0.1";
+$username = "academy";
+$password = "academy";
+$dbname = "blog";
 
-// try {
-// $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-// set the PDO error mode to exception
-// $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+try {
+    $connection = new PDO(
+        "mysql:host=$servername;dbname=$dbname",
+        $username,
+        $password
+    );
+    
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo $e->getMessage();
+};
+
+function fetch($sql, $connection, $isFetchAll = false)
+{
+    $statement = $connection->prepare($sql);
+    $statement->execute();
+    $statement->setFetchMode(PDO::FETCH_ASSOC);
+    if ($isFetchAll) {
+        return $statement->fetchAll();
+    }
+
+    return $statement->fetch();
+};
 ?>

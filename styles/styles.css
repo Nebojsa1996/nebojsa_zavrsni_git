@@ -51,6 +51,12 @@ h6,
   background-color: #b34848;
 }
 
+.nav a {
+  margin: 10px;
+  font-size: 16px;
+  padding: 5px;
+}
+
 .nav-link {
   position: relative;
   padding: 1rem;
@@ -79,6 +85,18 @@ h6,
   border-right: 0.3rem solid transparent;
   border-bottom: 0.3rem solid;
   border-left: 0.3rem solid transparent;
+}
+
+/* dugmic za dodavanje postova */
+
+.btn {
+  background-color: rgb(146, 138, 20);
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 17px;
+}
+.btn:hover {
+  padding: 13px;
 }
 
 /*
@@ -150,12 +168,6 @@ h6,
   margin-bottom: 1.25rem;
   color: #999;
 }
-
-/* .blog-post-title:hover {
-  margin-bottom: 0.25rem;
-  font-size: 2.5rem;
-  color: #b34848;
-} */
 
 .blog-post-title a {
   color: #b34848;
